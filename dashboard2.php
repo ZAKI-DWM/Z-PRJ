@@ -225,7 +225,7 @@ $user_id = $_SESSION['user_id'];
                 </a>
             </li>
             <li>
-                <a href="manage_users.php?user_id=<?php echo $user_id; ?>" class="load-page-link">
+                <a href="users_stats.php?user_id=<?php echo $user_id; ?>" class="load-page-link">
                     <i class="fas fa-users"></i>
                     <span>Gestion des Utilisateurs</span>
                 </a>
@@ -333,7 +333,7 @@ $user_id = $_SESSION['user_id'];
         // Load specific JS for each page
         function loadPageScript(page) {
             const scripts = {
-                'manage_users.php': 'js/manage_users.js',
+                'users_stats.php': 'js/users_stats.js',
                 'gerer_pn.php': 'js/gerer_pn.js',
                 'gerer_rp.php': 'js/gerer_rp.js',
                 'gerer_ord.php': 'js/gerer_ord.js',
