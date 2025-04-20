@@ -32,7 +32,7 @@ $user_id = $_SESSION['user_id'];
         }
         
         body {
-            background-color: #f5f5f5;
+            background-color:rgb(224, 6, 6);
             color: #333;
             overflow-x: hidden;
         }
