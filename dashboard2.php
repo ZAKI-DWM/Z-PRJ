@@ -237,7 +237,7 @@ $user_id = $_SESSION['user_id'];
                 </a>
             </li>
             <li>
-                <a href="settings.php?user_id=<?php echo $user_id; ?>" class="load-page-link">
+                <a href="profile.php?user_id=<?php echo $user_id; ?>" class="load-page-link">
                     <i class="fas fa-cog"></i>
                     <span>Paramètres</span>
                 </a>
@@ -333,13 +333,9 @@ $user_id = $_SESSION['user_id'];
         // Load specific JS for each page
         function loadPageScript(page) {
             const scripts = {
+                'Tableau_de_Bord.php': 'js/Tableau_de_Bord.js',
                 'users_stats.php': 'js/users_stats.js',
-                'gerer_pn.php': 'js/gerer_pn.js',
-                'gerer_rp.php': 'js/gerer_rp.js',
-                'gerer_ord.php': 'js/gerer_ord.js',
-                'statistiques.php': 'js/statistiques.js',
-                'manage_type_panne.php': 'js/gerer_typpn.js',
-                'P-GFI.php': 'js/P-GFI.js'
+                'profile.php': 'js/profile.js',
             };
 
             for (const key in scripts) {

@@ -22,7 +22,85 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Tableau de Bord</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="js/users_stats.js"></script>
-    <style>
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Main Content -->
+        <main>
+            <div class="card">
+                <h3>
+                    <span>Derniers utilisateurs inscrits</span>
+                    <button class="btn btn-primary" id="createUserBtn">
+                        <i class="fas fa-plus"></i> Créer user
+                    </button>
+                </h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom d'utilisateur</th>
+                                <th>Email</th>
+                                <th>Date d'inscription</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($users as $user): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($user['id']); ?></td>
+                                <td><?php echo htmlspecialchars($user['username']); ?></td>
+                                <td><?php echo htmlspecialchars($user['email']); ?></td>
+                                <td><?php echo date('d/m/Y H:i', strtotime($user['created_at'])); ?></td>
+                                <td>
+                                    <a href="edit_user.php?id=<?php echo $user['id']; ?>" 
+                                       class="action-link"
+                                       title="Modifier cet utilisateur">
+                                        <i class="fas fa-edit"></i> Modifier
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal pour créer un nouvel utilisateur -->
+    <div class="modal" id="createUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Créer un nouvel utilisateur</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="createUserForm" action="create_user.php" method="POST">
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirmer le mot de passe</label>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" id="cancelBtn">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Créer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+                                <style>
         /* Reset CSS */
         * {
             margin: 0;
@@ -220,84 +298,6 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <!-- Main Content -->
-        <main>
-            <div class="card">
-                <h3>
-                    <span>Derniers utilisateurs inscrits</span>
-                    <button class="btn btn-primary" id="createUserBtn">
-                        <i class="fas fa-plus"></i> Créer user
-                    </button>
-                </h3>
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom d'utilisateur</th>
-                                <th>Email</th>
-                                <th>Date d'inscription</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($users as $user): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($user['id']); ?></td>
-                                <td><?php echo htmlspecialchars($user['username']); ?></td>
-                                <td><?php echo htmlspecialchars($user['email']); ?></td>
-                                <td><?php echo date('d/m/Y H:i', strtotime($user['created_at'])); ?></td>
-                                <td>
-                                    <a href="edit_user.php?id=<?php echo $user['id']; ?>" 
-                                       class="action-link"
-                                       title="Modifier cet utilisateur">
-                                        <i class="fas fa-edit"></i> Modifier
-                                    </a>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal pour créer un nouvel utilisateur -->
-    <div class="modal" id="createUserModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Créer un nouvel utilisateur</h3>
-                <button class="close-btn" id="closeModalBtn">&times;</button>
-            </div>
-            <form id="createUserForm" action="create_user.php" method="POST">
-                <div class="form-group">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input type="text" id="username" name="username" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirm_password">Confirmer le mot de passe</label>
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn" id="cancelBtn">Annuler</button>
-                    <button type="submit" class="btn btn-primary">Créer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
         // Gestion de la modal
         const createUserBtn = document.getElementById('createUserBtn');
